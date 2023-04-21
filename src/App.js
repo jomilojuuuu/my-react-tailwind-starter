@@ -1,7 +1,18 @@
+import React, {useState} from 'react'
+import Form from './components/Form'
+import Header from './components/Header'
+import Card from './components/Card'
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      {/* header */}
+      <Header />
+      <div>
+        <Form />
+      </div>
+      {/* card */}
+      <Card />
+    </div>
   )
 }
