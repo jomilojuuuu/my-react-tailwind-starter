@@ -49,7 +49,7 @@ export default function App() {
         <Form handelSubmit={handelSubmit} />
       </div>
       {/* card */}
-      <div className="flex">
+      <div className="grid grid-cols-5">
         {cards.map((todo) => (
           <Card key={todo.id} cards={todo} handelDelete={handelDelete} />
         ))}
