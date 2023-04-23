@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 
 export default function App() {
+  const [newTodo, setNewTodo] = useState("");
+  //the todo dataset
   const [cards, setCards] = useState([
     {
       title: "sleep",
@@ -21,10 +23,22 @@ export default function App() {
       id: 3,
     },
   ]);
-
+  //the card delete function
   const handelDelete = (id) => {
     const newCards = cards.filter((cards) => cards.id !== id);
     setCards(newCards);
+  };
+
+  // addTodo function
+  const handelSubmit = (title, todo) => {
+    const newTodos = [...cards];
+    newTodos.push({
+      title: title,
+      whatToDo: todo,
+      id: cards.length + 1,
+    });
+    setCards(newTodos);
+    setNewTodo("");
   };
 
   return (
@@ -32,12 +46,12 @@ export default function App() {
       {/* header */}
       <Header />
       <div>
-        <Form />
+        <Form handelSubmit={handelSubmit} />
       </div>
       {/* card */}
       <div className="flex">
         {cards.map((todo) => (
-          <Card key={cards.id} cards={todo} handelDelete={handelDelete} />
+          <Card key={todo.id} cards={todo} handelDelete={handelDelete} />
         ))}
       </div>
     </div>
