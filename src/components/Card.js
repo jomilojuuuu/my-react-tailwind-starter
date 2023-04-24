@@ -7,16 +7,16 @@ function Card({ cards, handelDelete }) {
   return (
     <div>
       {
-        <div className="box-border shadow-md border w-40 h-auto ml-10 mt-20 bg-gray-100">
+        <div className="w-[240px] float-left bg-white rounded-[7px] p-[10px] m-[16px] shadow-md">
           <p
             title={title}
-            className="text-gray-400 text-lg font-bold px-2 truncate"
+            className="text-black text-[1.1em] mb-[6px] text-lg font-bold px-2 truncate"
           >
             {title}
           </p>
-          <p className="text-gray-400 pt-2 px-2">{whatToDo}</p>
+          <p className="text-[1.1em] mb-[10px] px-2">{whatToDo}</p>
           <button
-            className="bg-blue-200 ml-[88px] mt-1 px-3 shadow-md"
+            className="relative float-right mr-[10px] text-yellow-500 w-[50px] cursor-pointer bg-gray-200 outline-none h-[30px]"
             onClick={() => handelDelete(cards.id)}
           >
             Delete

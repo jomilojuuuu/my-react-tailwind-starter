@@ -6,9 +6,9 @@ function Form({ cards, handelSubmit }) {
   const [todo, setTodo] = useState("");
 
   return (
-    <div className="">
+    <div>
       <form
-        className="flex flex-col justify-center items-center mt-[90px]"
+        className="relative w-[480px] h-[150px] shadow-md  p-[15px] rounded-[7px] bg-white mt-20 ml-[400px]"
         onSubmit={(e) => {
           e.preventDefault();
           handelSubmit(title, todo);
@@ -17,7 +17,7 @@ function Form({ cards, handelSubmit }) {
         <input
           type="text"
           placeholder="Title"
-          className="p-3 bg-red-300 w-80 pl"
+          className="w-[380px] text-[1.2em] p-[4px] outline-none"
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -25,15 +25,15 @@ function Form({ cards, handelSubmit }) {
 
         <input
           type="text"
-          placeholder="What to do"
-          className="p-3 bg-pink-300 w-80"
+          placeholder="Take a content..."
+          className="w-[380px] text-[1.2em] p-[4px] outline-none"
           required
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
         />
         <button
           type="submit"
-          className="h-10 rounded-full bg-blue-300 text-white font-bold px-5 ml-[255px] -mt-5"
+          className="absolute right-[18px] bottom-[-18px] w-[36px] cursor-pointer h-[36px] bg-yellow-500 rounded-[50%] text-white outline-none shadow-md"
         >
           Add
         </button>
