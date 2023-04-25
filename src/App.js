@@ -2,58 +2,52 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import Card from "./components/Card";
+import initialTodos from "./data/todos";
 
 export default function App() {
-  const [newTodo, setNewTodo] = useState("");
-  //the todo dataset
-  const [cards, setCards] = useState([
-    {
-      title: "sleep",
-      whatToDo: "i need to sleep by 5pm",
-      id: 1,
-    },
-    {
-      title: "play",
-      whatToDo: "i need to play by 8am",
-      id: 2,
-    },
-    {
-      title: "read",
-      whatToDo: "i need to read by 12pm",
-      id: 3,
-    },
-  ]);
-  //the card delete function
-  const handelDelete = (id) => {
-    const newCards = cards.filter((cards) => cards.id !== id);
-    setCards(newCards);
-  };
+    const [title, setTitle] = useState("");
+    const [todo, setTodo] = useState("");
 
-  // addTodo function
-  const handelSubmit = (title, todo) => {
-    const newTodos = [...cards];
-    newTodos.push({
-      title: title,
-      whatToDo: todo,
-      id: cards.length + 1,
-    });
-    setCards(newTodos);
-    setNewTodo("");
-  };
+    //the todo dataset
+    const [cards, setCards] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : initialTodos);
 
-  return (
-    <div>
-      {/* header */}
-      <Header />
-      <div>
-        <Form handelSubmit={handelSubmit} />
-      </div>
-      {/* card */}
-      <div className="grid grid-cols-5">
-        {cards.map((todo) => (
-          <Card key={todo.id} cards={todo} handelDelete={handelDelete} />
-        ))}
-      </div>
-    </div>
-  );
+    //the card delete function
+    const handelDelete = (id) => {
+        const newCards = cards.filter((cards) => cards.id !== id);
+        setCards(newCards);
+    };
+
+    // addTodo function
+    const handelSubmit = (e) => {
+        e.preventDefault();
+        const newTodos = [...cards];
+        newTodos.push({
+            title: title,
+            whatToDo: todo,
+            id: cards.length + 1,
+        });
+        setCards(newTodos);
+
+        // save to local storage
+        localStorage.setItem("todos", JSON.stringify(newTodos));
+
+        setTitle("");
+        setTodo("");
+    };
+
+    return (
+        <div>
+            {/* header */}
+            <Header />
+            <div>
+                <Form handelSubmit={handelSubmit} title={title} todo={todo} setTitle={setTitle} setTodo={setTodo} />
+            </div>
+            {/* card */}
+            <div className="grid grid-cols-5">
+                {cards.map((todo) => (
+                    <Card key={todo.id} cards={todo} handelDelete={handelDelete} />
+                ))}
+            </div>
+        </div>
+    );
 }
